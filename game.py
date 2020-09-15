@@ -1,14 +1,16 @@
 from classes.player import Player
+from classes.virus import Virus
 import pyxel
 
 
 class App:
     def __init__(self):
-        pyxel.init(120, 90, caption='Corong', fps=30)
+        pyxel.init(256, 150, caption='Corong', fps=30)
         self.player1 = Player('p1')
         self.player2 = Player('p2')
+        self.virus = Virus()
 
-        pyxel.load('assets/syringe.pyxres')
+        pyxel.load('assets/sprites.pyxres')
         pyxel.run(self.update, self.draw)
 
     def update(self):
@@ -19,6 +21,7 @@ class App:
         pyxel.cls(0)
         self.player1.draw()
         self.player2.draw()
+        self.virus.draw()
 
 
 if __name__ == '__main__':
