@@ -22,5 +22,6 @@ class Sprite:
             self.start_x,
             self.start_y,
             self.width,
-            self.height
+            self.height,
+            colkey=pyxel.COLOR_BLACK
         )

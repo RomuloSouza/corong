@@ -16,10 +16,24 @@ class Syringe(Sprite):
             self.pos_x = 0
             self.key_up = pyxel.KEY_W
             self.key_down = pyxel.KEY_S
+
+            # syringe divided in 2 rectangles
+            # (x, (begin_y, end_y))
+            self.hitbox = [
+                (self.width-4, (self.pos_y, self.pos_y+24)),
+                (self.width, (self.pos_y+25, self.pos_y+self.height))
+            ]
+
         elif name == 'p2':
             self.pos_x = pyxel.width - self.width
             self.key_up = pyxel.KEY_UP
             self.key_down = pyxel.KEY_DOWN
+
+            screen = pyxel.width
+            self.hitbox = [
+                (screen-self.width+4, (self.pos_y, self.pos_y+24)),
+                (screen-self.width, (self.pos_y+25, self.pos_y+self.height))
+            ]
 
     def update(self):
         if pyxel.btn(self.key_up) and self.pos_y > 0:
