@@ -17,25 +17,29 @@ class Virus(Sprite):
         self.pos_y = (pyxel.height - self.height) / 2
         self.pos_x = (pyxel.width - self.width) / 2
 
-        self.speed_x = 0
-        self.speed_y = 0
+        self.speed_x = constants.VIRUS_MIN_SPEED_X
+        self.speed_y = constants.VIRUS_MIN_SPEED_Y
 
         self.reset_virus(random.choice([player1, player2]))
 
     def update(self):
         self.pos_x += self.speed_x
-        self.pos_y += self.speed_y
+        self.pos_y += int(self.speed_y)
 
         self.update_hitbox()
 
+        self.check_screen_border()
+
         if self.speed_x > 0:
             if self.check_colision(self.player2):
-                self.speed_x *= -1
-                self.speed_y *= -1
+                self.update_speed(self.player2)
         else:
             if self.check_colision(self.player1):
-                self.speed_x *= -1
-                self.speed_y *= -1
+                self.update_speed(self.player1)
+
+    def check_screen_border(self):
+        if self.pos_y <= 0 or self.pos_y >= pyxel.height-self.width:
+            self.speed_y *= -1
 
     def check_colision(self, player):
         for s_hbox in player.syringe.hitbox:
@@ -54,6 +58,23 @@ class Virus(Sprite):
 
         return False
 
+    def update_speed(self, player):
+        both_up = self.speed_y < 0 and pyxel.btn(player.syringe.key_up)
+        both_down = self.speed_y > 0 and pyxel.btn(player.syringe.key_down)
+        if both_up or both_down:
+            speed_min = min(abs(self.speed_x)+1, constants.VIRUS_MAX_SPEED_X)
+            if self.speed_x < 0:
+                self.speed_x = speed_min
+            else:
+                self.speed_x = -speed_min
+
+            if self.speed_y < 0:
+                self.speed_y -= 0.5
+            else:
+                self.speed_y += 0.5
+        else:
+            self.speed_x *= -1
+
     def update_hitbox(self):
         self.hitbox = [
             (self.pos_x+2, (self.pos_y+2, self.pos_y+2+4)),  # p1 colision
@@ -62,8 +83,8 @@ class Virus(Sprite):
 
     def reset_virus(self, player):
         initial_height = random.choice([0, pyxel.height-self.height])
-        self.speed_x = constants.VIRUS_SPEED_X
-        self.speed_y = constants.VIRUS_SPEED_Y
+        self.speed_x = constants.VIRUS_MIN_SPEED_X
+        self.speed_y = constants.VIRUS_MIN_SPEED_Y
         if initial_height:
             self.speed_y *= -1
 
