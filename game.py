@@ -8,7 +8,7 @@ import random
 import pyxel
 
 
-class App:
+class Game:
     def __init__(self):
         pyxel.init(256, 150, caption='Corong', fps=60)
         self.virus = Virus()
@@ -87,4 +87,4 @@ class App:
 
 
 if __name__ == '__main__':
-    App()
+    Game()

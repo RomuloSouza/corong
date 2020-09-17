@@ -9,7 +9,7 @@ class Score:
 
     def draw(self):
         pyxel.text(
-            pyxel.width / 2 - 20,
+            pyxel.width / 2 - 24,
             0,
             str(self.player1.score),
             pyxel.COLOR_WHITE
