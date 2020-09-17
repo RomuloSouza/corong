@@ -2,17 +2,17 @@ import pyxel
 
 
 class Sprite:
-    def __init__(self):
-        self.pos_x = 0
-        self.pos_y = 0
-        self.img_idx = 0
+    def __init__(self, x, y, i, u, v, w, h):
+        self.pos_x = x
+        self.pos_y = y
+        self.img_idx = i
 
         # start (u, v) of the image bank (img_idx)
-        self.start_x = 0
-        self.start_y = 0
+        self.start_x = u
+        self.start_y = v
 
-        self.width = 0
-        self.height = 0
+        self.width = w
+        self.height = h
 
     def draw(self):
         pyxel.blt(

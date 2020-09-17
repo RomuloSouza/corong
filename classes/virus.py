@@ -6,13 +6,15 @@ import pyxel
 
 class Virus(Sprite):
     def __init__(self):
-        self.width = constants.VIRUS_WIDTH
-        self.height = constants.VIRUS_HEIGHT
-        self.img_idx = constants.VIRUS_IDX
-        self.start_x = constants.VIRUS_START_X
-        self.start_y = constants.VIRUS_START_Y
-        self.pos_y = (pyxel.height - self.height) / 2
-        self.pos_x = (pyxel.width - self.width) / 2
+        super().__init__(
+            (pyxel.width - constants.VIRUS_WIDTH) / 2,
+            (pyxel.height - constants.VIRUS_HEIGHT) / 2,
+            constants.VIRUS_IDX,
+            constants.VIRUS_START_X,
+            constants.VIRUS_START_Y,
+            constants.VIRUS_WIDTH,
+            constants.VIRUS_HEIGHT
+        )
 
         self.speed_x = 0
         self.speed_y = 0

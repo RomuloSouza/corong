@@ -5,12 +5,15 @@ import pyxel
 
 class Syringe(Sprite):
     def __init__(self, name):
-        self.width = constants.SYRINGE_WIDTH
-        self.height = constants.SYRINGE_HEIGHT
-        self.img_idx = constants.SYRINGE_IDX
-        self.start_x = constants.SYRINGE_START_X
-        self.start_y = constants.SYRINGE_START_Y
-        self.pos_y = (pyxel.height - self.height) / 2
+        super().__init__(
+            0,
+            (pyxel.height - constants.SYRINGE_HEIGHT) / 2,
+            constants.SYRINGE_IDX,
+            constants.SYRINGE_START_X,
+            constants.SYRINGE_START_Y,
+            constants.SYRINGE_WIDTH,
+            constants.SYRINGE_HEIGHT
+        )
         self.name = name
 
         if name == 'p1':

@@ -1,5 +1,7 @@
 from classes.player import Player
+from classes.score import Score
 from classes.virus import Virus
+
 from classes.constants import STATES
 
 import random
@@ -13,7 +15,7 @@ class App:
         self.state = STATES['0']
         self.player1 = Player('p1')
         self.player2 = Player('p2')
-        self.last_to_score = None
+        self.score = Score(self.player1, self.player2)
 
         pyxel.load('assets/sprites.pyxres')
         pyxel.run(self.update, self.draw)
@@ -38,6 +40,7 @@ class App:
         self.player1.draw()
         self.player2.draw()
         self.virus.draw()
+        self.score.draw()
 
     def check_state(self):
         if self.state == STATES['0']:
@@ -49,12 +52,10 @@ class App:
         if virus.pos_y <= 0 or virus.pos_y >= pyxel.height-virus.height:
             virus.invert_speed_y_direction()
         elif virus.pos_x <= 0:
-            self.player2.score += 1
-            self.last_to_score = self.player2
+            self.score.increase_score(self.player2)
             self.set_state('0')
         elif virus.pos_x >= pyxel.width-virus.width:
-            self.player1.score += 1
-            self.last_to_score = self.player1
+            self.score.increase_score(self.player1)
             self.set_state('0')
 
     def check_colision(self, player):
@@ -79,7 +80,7 @@ class App:
         if state == '0':
             self.virus = Virus()
         elif state == '1':
-            player = self.last_to_score or random.choice(
+            player = self.score.last_to_score or random.choice(
                 [self.player1, self.player2]
             )
             self.virus.throw_virus(player)
