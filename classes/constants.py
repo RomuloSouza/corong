@@ -15,3 +15,9 @@ VIRUS_START_Y = 44
 VIRUS_MIN_SPEED_X = 2
 VIRUS_MAX_SPEED_X = 4
 VIRUS_MIN_SPEED_Y = 1
+
+STATES = {
+    '0': 'to_start',
+    '1': 'ongoing',
+    '2': 'finished'
+}

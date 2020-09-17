@@ -14,8 +14,8 @@ class Virus(Sprite):
         self.pos_y = (pyxel.height - self.height) / 2
         self.pos_x = (pyxel.width - self.width) / 2
 
-        self.speed_x = constants.VIRUS_MIN_SPEED_X
-        self.speed_y = constants.VIRUS_MIN_SPEED_Y
+        self.speed_x = 0
+        self.speed_y = 0
 
     def update(self):
         self.pos_x += self.speed_x
@@ -49,8 +49,8 @@ class Virus(Sprite):
             (self.pos_x+self.width-2, (self.pos_y+2, self.pos_y+2+4))
         ]
 
-    def reset_virus(self, player):
-        initial_height = random.choice([0, pyxel.height-self.height])
+    def throw_virus(self, player):
+        initial_height = random.choice([1, pyxel.height-self.height-1])
         self.speed_x = constants.VIRUS_MIN_SPEED_X
         self.speed_y = constants.VIRUS_MIN_SPEED_Y
         self.pos_y = initial_height
